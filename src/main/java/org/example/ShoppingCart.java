@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ShoppingCart {
+
     private Map<String, Double> items;
     private double MAX_VALUE = 10.0;
 

@@ -92,7 +92,7 @@ class ShoppingCartTest {
     }
 
     @Test
-    void calulateTotalWithDiscountZeroPercent() {
+    void calculateTotalWithDiscountZeroPercent() {
         shoppingCart.addItem("apple", 1.0);
         shoppingCart.addItem("banana", 2.0);
         shoppingCart.addItem("Orange", 3.0);
@@ -101,7 +101,7 @@ class ShoppingCartTest {
     }
 
     @Test
-    void calulateTotalWithDiscountTenPercent() {
+    void calculateTotalWithDiscountTenPercent() {
         shoppingCart.addItem("apple", 1.0);
         shoppingCart.addItem("banana", 2.0);
         shoppingCart.addItem("Orange", 3.0);

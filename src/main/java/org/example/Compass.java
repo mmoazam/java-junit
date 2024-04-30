@@ -9,7 +9,7 @@ public class Compass {
         LEFT, RIGHT
     }
 
-    private Point point;
+   // private Point point;
 
     public static Point rotate(Point point, Direction direction) {
         int index;
@@ -20,18 +20,6 @@ public class Compass {
         }else {
             index = (point.ordinal() - 1 + points.length) % points.length;
         }
-
-
-
-
-//        // NORTH, EAST, SOUTH, WEST
-//
-//        // forward
-//        index = (point.ordinal() + movement) % points.length;
-//
-//        // move backward
-//        index = (point.ordinal() - movement + points.length) % points.length;
-
 
         return points[index];
     }

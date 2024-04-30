@@ -1,6 +1,5 @@
 package org.example;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class ShoppingCartTest {
 
     private ShoppingCart shoppingCart = new ShoppingCart();
-
 
 
     @Test
@@ -45,5 +43,69 @@ class ShoppingCartTest {
 
     @Test
     void totalPrice() {
+        shoppingCart.addItem("apple", 1.0);
+        shoppingCart.addItem("banana", 2.0);
+        shoppingCart.addItem("Orange", 3.0);
+        assertEquals(6.0, shoppingCart.totalPrice());
+    }
+
+    @Test
+    void totalZeroPrice() {
+        shoppingCart.addItem("apple", 0.0);
+        shoppingCart.addItem("banana", 0.0);
+        shoppingCart.addItem("Orange", 0.0);
+        assertEquals(0.0, shoppingCart.totalPrice());
+    }
+
+    @Test
+    void addNegativePrice() {
+        assertThrowsExactly(IllegalArgumentException.class, () -> shoppingCart.addItem("apple", -1.0));
+    }
+
+    @Test
+    void emptyCart() {
+        assertEquals(0.0, shoppingCart.totalPrice());
+    }
+
+    @Test
+    void setShoppingCartDiscount() { //
+        shoppingCart.setDiscount(0.5);
+        assertEquals(0.5, shoppingCart.getDiscount());
+    }
+
+    @Test
+    void setDiscountOutOfBoundsThrowsException() {
+       assertThrowsExactly(IllegalArgumentException.class, () -> shoppingCart.setDiscount(-0.5));
+       assertThrowsExactly(IllegalArgumentException.class, () -> shoppingCart.setDiscount(1.5));
+    }
+
+    @Test
+    void setDiscountWithinBounds() {
+        shoppingCart.setDiscount(0);
+        assertEquals(0.0, shoppingCart.getDiscount());
+
+        shoppingCart.setDiscount(1);
+        assertEquals(1.0, shoppingCart.getDiscount());
+
+        shoppingCart.setDiscount(0.75);
+        assertEquals(0.75, shoppingCart.getDiscount());
+    }
+
+    @Test
+    void calulateTotalWithDiscountZeroPercent() {
+        shoppingCart.addItem("apple", 1.0);
+        shoppingCart.addItem("banana", 2.0);
+        shoppingCart.addItem("Orange", 3.0);
+        shoppingCart.setDiscount(0.0);
+        assertEquals(6.0, shoppingCart.totalPrice());
+    }
+
+    @Test
+    void calulateTotalWithDiscountTenPercent() {
+        shoppingCart.addItem("apple", 1.0);
+        shoppingCart.addItem("banana", 2.0);
+        shoppingCart.addItem("Orange", 3.0);
+        shoppingCart.setDiscount(0.1);
+        assertEquals(5.4, shoppingCart.totalPrice());
     }
 }

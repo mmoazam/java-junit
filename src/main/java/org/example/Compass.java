@@ -12,7 +12,6 @@ public class Compass {
     private Point point;
 
     public static Point rotate(Point point, Direction direction) {
-        int movement;
         int index;
         Point[] points = Point.values();
 

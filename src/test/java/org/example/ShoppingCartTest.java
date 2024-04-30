@@ -3,13 +3,16 @@ package org.example;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShoppingCartTest {
 
-    private ShoppingCart shoppingCart = new ShoppingCart();
+    Map<String, Double> items = new HashMap<>();
+    double discount = 0.0;
+    private ShoppingCart shoppingCart = new ShoppingCart(items, discount);
 
 
     @Test
@@ -48,6 +51,15 @@ class ShoppingCartTest {
         shoppingCart.addItem("Orange", 3.0);
         assertEquals(6.0, shoppingCart.totalPrice());
     }
+
+    @Test
+    void totalPriceExceedsMaxValue() {
+        shoppingCart.addItem("apple", 1.0);
+        shoppingCart.addItem("banana", 2.0);
+        shoppingCart.addItem("Orange", 13.0);
+        assertThrowsExactly(IllegalArgumentException.class, () -> shoppingCart.totalPrice());
+    }
+
 
     @Test
     void totalZeroPrice() {

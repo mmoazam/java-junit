@@ -2,7 +2,10 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,15 +42,46 @@ class WordAnalyserTest {
 
 
     @Test
-    void calculateLetterFrequency() {
+    void calculateLetterFrequencyReturnsEmptyMap() {
         //arrange
         WordAnalyser wordAnalyser = new WordAnalyser();
-        String input = "aaabbbbccccc";
-        int expected = 5;
+        //String input = "aaabbbbccccc";
+        String input = "";
+        Map<Character, Integer> expected = new HashMap<Character, Integer>();
+
         //act
         Map<Character, Integer> actual = wordAnalyser.calculateLetterFrequency(input);
 
-        //assert
+        //assert returns a map
+        assertEquals(expected, actual);
+    }
 
+    @Test
+    void calculateLetterFrequency() {
+        //arrange
+        WordAnalyser wordAnalyser = new WordAnalyser();
+        String input = "aaa hello world bbbbccccc";
+        int expected = 3;
+
+        //act
+        Map<Character, Integer> returnedMap = wordAnalyser.calculateLetterFrequency(input);
+        int actual = returnedMap.get('a');
+
+        //assert returns a map
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void calculateLetterFrequencyNoLetterInString() {
+        //arrange
+        WordAnalyser wordAnalyser = new WordAnalyser();
+        String input = "aaa hello world bbbbccccc";
+
+        //act
+        Map<Character, Integer> returnedMap = wordAnalyser.calculateLetterFrequency(input);
+        Object actual = returnedMap.get('z');
+
+        //assert returns null
+        assertNull(actual);
     }
 }

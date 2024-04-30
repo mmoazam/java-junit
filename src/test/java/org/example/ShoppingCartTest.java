@@ -29,7 +29,7 @@ class ShoppingCartTest {
         assertTrue(expected.containsKey("Orange"));
         assertEquals(1.0, expected.get("apple"));
         assertEquals(2.0, expected.get("banana"));
-        assertEquals(3.0, expected.get("Orange"),);
+        assertEquals(3.0, expected.get("Orange"));
     }
 
     @Test
